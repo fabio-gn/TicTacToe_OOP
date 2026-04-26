@@ -1,0 +1,84 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.tictactoe;
+
+import com.mycompany.tictactoe.exceptions.InvalidGridSizeException;
+import com.mycompany.tictactoe.exceptions.InvalidNameException;
+import com.mycompany.tictactoe.exceptions.InvalidSymbolException;
+import com.mycompany.tictactoe.exceptions.InvalidPlayerException;
+import com.mycompany.tictactoe.exceptions.InvalidPositionException;
+import com.mycompany.tictactoe.exceptions.SquareAlreadyOccupiedException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Fabio
+ */
+public class Game {
+    private int playersNumber = 2;
+    private List<Player> players;
+    private Grid grid;
+    private Player turn;
+    
+    
+    
+    
+    public Game(){
+        this.players = new ArrayList<>();
+    }
+    
+
+
+
+    public void setPlayers(Player player1, Player player2) throws InvalidPlayerException{
+        if(player1 == null || player2 == null){
+            throw new InvalidPlayerException("almeno uno dei giocatori e' null");
+        }
+        this.players.add(player1);
+        this.players.add(player2);
+        
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid() throws InvalidGridSizeException{
+        this.grid = new Grid(Grid.gridSize);
+    }
+    public void setGrid(int x, int y) throws InvalidGridSizeException{
+        int[] size = {x, y}; 
+        this.grid = new Grid(size);
+    }
+
+    public Player getTurn() {
+        return turn;
+    }
+
+    public void setTurn() throws InvalidPlayerException{
+        if(this.players.size() < 2 || this.players.size() > 2){
+            throw new InvalidPlayerException("Invalid number of players");
+        }
+        if(this.turn == null){
+            this.turn = this.players.get(0);
+        }
+        
+        if(this.players.indexOf(turn)%2 > 0){
+            this.turn = this.players.get(0);
+        }
+        else{
+            this.turn = this.players.get(1);
+        }
+
+    }
+    public void makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException{
+
+        this.grid.setSquare(x, y, p.getSymbol());
+
+    }
+    
+}
+
