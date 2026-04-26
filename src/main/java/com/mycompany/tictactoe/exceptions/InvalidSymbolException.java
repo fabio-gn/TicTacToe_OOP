@@ -8,7 +8,7 @@ package com.mycompany.tictactoe.exceptions;
  *
  * @author Fabio
  */
-public class InvalidSymbolException extends Exception {
+public class InvalidSymbolException extends InvalidPlayerException {
 
     /**
      * Creates a new instance of <code>InvalidSymbolException</code> without

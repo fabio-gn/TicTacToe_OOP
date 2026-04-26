@@ -8,22 +8,22 @@ package com.mycompany.tictactoe.exceptions;
  *
  * @author Fabio
  */
-public class InvalidNameException extends InvalidPlayerException{
+public class InvalidPlayerException extends Exception {
 
     /**
-     * Creates a new instance of <code>InvalidNameException</code> without
+     * Creates a new instance of <code>InvalidPlayerException</code> without
      * detail message.
      */
-    public InvalidNameException() {
+    public InvalidPlayerException() {
     }
 
     /**
-     * Constructs an instance of <code>InvalidNameException</code> with the
+     * Constructs an instance of <code>InvalidPlayerException</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
-    public InvalidNameException(String msg) {
+    public InvalidPlayerException(String msg) {
         super(msg);
     }
 }
