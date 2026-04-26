@@ -5,13 +5,15 @@
 package com.mycompany.tictactoe;
 
 import com.mycompany.tictactoe.exceptions.InvalidGridSizeException;
+import com.mycompany.tictactoe.exceptions.InvalidPositionException;
+import com.mycompany.tictactoe.exceptions.SquareAlreadyOccupiedException;
 
 /**
  *
  * @author Fabio
  */
 public class Grid {
-    private static int[] gridSize = {3,3};
+    protected static int[] gridSize = {3,3};
     private char[][] grid;
     
     public Grid() throws InvalidGridSizeException{
@@ -111,26 +113,31 @@ public class Grid {
         if(check == true) {
             return this.grid[0][2];
         }
-        
 
-//        for(int i=0; i<this.grid.length -1; i++){
-//            for(int j = this.grid[i].length -1; j>=0; j--){
-//                if(this.grid[i][j] != '-' && this.grid[i][j] == this.grid[i+1][j-1]){
-//                    check = true;
-//                    continue;
-//                }
-//                check = false;
-//                
-//            }
-//            if(check == true){
-//                return this.grid[0][2];
-//                
-//            }
-//        }
 
         return '-';
     }
     
+    private void validatePosition(int x, int y) throws InvalidPositionException{
+        if(x < 0 || x >= this.grid.length){
+            throw new InvalidPositionException("valore x troppo grande o troppo piccolo");
+        }
+        if(y < 0 || y >= this.grid[0].length){
+            throw new InvalidPositionException("valore y troppo grande o troppo piccolo");
+        }
+    }
+    public char getSquare(int x, int y) throws InvalidPositionException{
+        this.validatePosition(x,y);
+        return this.grid[x][y];
+    }
+    
+    public void setSquare(int x, int y, char symbol) throws InvalidPositionException, SquareAlreadyOccupiedException{
+        if(this.getSquare(x, y) != '-'){
+            throw new SquareAlreadyOccupiedException();
+        }
+        this.grid[x][y] = symbol;
+    }
+        
 
     
     
