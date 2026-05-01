@@ -4,6 +4,7 @@
  */
 package com.mycompany.tictactoe;
 
+import com.mycompany.tictactoe.exceptions.IdenticalPlayerNamesException;
 import com.mycompany.tictactoe.exceptions.InvalidGridSizeException;
 import com.mycompany.tictactoe.exceptions.InvalidNameException;
 import com.mycompany.tictactoe.exceptions.InvalidSymbolException;
@@ -35,9 +36,14 @@ public class Game {
 
 
 
-    public void setPlayers(Player player1, Player player2) throws InvalidPlayerException{
+    public void setPlayers(Player player1, Player player2) throws InvalidPlayerException, IdenticalPlayerNamesException{
+        //TODO: gestire il caso in cui vengono inseriti due nomi giocatore identici.
+        
         if(player1 == null || player2 == null){
             throw new InvalidPlayerException("almeno uno dei giocatori e' null");
+        }
+        if (player1.getName().equals(player2.getName())){
+            throw new IdenticalPlayerNamesException();
         }
         this.players.add(player1);
         this.players.add(player2);
