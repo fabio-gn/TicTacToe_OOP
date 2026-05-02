@@ -32,7 +32,13 @@ public class Game {
     public Game(){
         this.players = new ArrayList<>();
     }
-    
+    public Game(Player player1, Player player2) throws InvalidPlayerException, IdenticalPlayerNamesException, InvalidGridSizeException{
+        this.players = new ArrayList<>();
+        this.setPlayers(player1, player2);
+        this.setTurn();
+        this.setGrid();
+    }
+       
 
 
 
@@ -49,6 +55,11 @@ public class Game {
         this.players.add(player2);
         
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+    
 
     public Grid getGrid() {
         return grid;
@@ -82,9 +93,12 @@ public class Game {
         }
 
     }
-    public void makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException{
+    public char makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException, InvalidPlayerException{
 
         this.grid.setSquare(x, y, p.getSymbol());
+        this.setTurn();
+        return this.grid.checkGrid();
+        
 
     }
     

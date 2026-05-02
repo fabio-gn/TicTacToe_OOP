@@ -4,6 +4,9 @@
 
 package com.mycompany.tictactoe;
 
+import com.mycompany.tictactoe.view.Shell;
+
+
 /**
  *
  * @author Fabio
@@ -11,6 +14,7 @@ package com.mycompany.tictactoe;
 public class TicTacToe {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Shell shell = new Shell();
+        shell.inputReader();
     }
 }
