@@ -51,10 +51,6 @@ public class Shell {
             System.out.println("Inserisci il nome del giocatore 2: ");
             String name2 = sc.nextLine();
             Player player2 = new Player(name2, 'x');
-            //this.game.setPlayers(player1, player2);
-            //TODO: il setTurn dovrebbe avvenire nel costruttore di game
-            //this.game.setTurn();
-            //this.game.setGrid();
             this.game = new Game(player1, player2);
             this.validCoordinates = new ArrayList<>();
             this.generateValidCoordinates();
@@ -83,8 +79,6 @@ public class Shell {
             this.printGrid();
             System.out.print("TicTacToe/" + currentPlayer.getName() + "> ");
             userInput = reader.nextLine();
-            //TODO: serve una funzione per che converta A1, B2 e coordinate simili in indici di array multidimensionale
-            //il prompt che viene chiesto all'utente e' proprio quello.
             if(userInput.toUpperCase().equals("EXIT")){
                 break;
             }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Controller principale del gioco: gestisce il flusso della partita. Gestisce i turni dei giocatori e le interazioni tra Player e Grid
  * @author Fabio
  */
 public class Game {
@@ -41,10 +41,14 @@ public class Game {
        
 
 
-
+    /**
+     * Aggiunge due oggetti Player alla lista players
+     * @param player1
+     * @param player2
+     * @throws InvalidPlayerException se i giocatori passati nei parametri sono null
+     * @throws IdenticalPlayerNamesException se i giocatori passati nei parametri hanno lo stesso nome
+     */
     public void setPlayers(Player player1, Player player2) throws InvalidPlayerException, IdenticalPlayerNamesException{
-        //TODO: gestire il caso in cui vengono inseriti due nomi giocatore identici.
-        
         if(player1 == null || player2 == null){
             throw new InvalidPlayerException("almeno uno dei giocatori e' null");
         }
@@ -68,16 +72,21 @@ public class Game {
     public void setGrid() throws InvalidGridSizeException{
         this.grid = new Grid(Grid.gridSize);
     }
-    public void setGrid(int x, int y) throws InvalidGridSizeException{
-        int[] size = {x, y}; 
+    /**
+     * Inizializza una griglia delle dimensioni specificate nei parametri
+     * @param width
+     * @param height
+     * @throws InvalidGridSizeException se le dimensioni sono piu' di due o se sono numeri negativi
+     */
+    public void setGrid(int width, int height) throws InvalidGridSizeException{
+        int[] size = {width, height}; 
         this.grid = new Grid(size);
     }
-
     public Player getTurn() {
         return turn;
     }
-
-    public void setTurn() throws InvalidPlayerException{
+    
+    private void setTurn() throws InvalidPlayerException{
         if(this.players.size() < 2 || this.players.size() > 2){
             throw new InvalidPlayerException("Invalid number of players");
         }

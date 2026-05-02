@@ -9,7 +9,8 @@ import com.mycompany.tictactoe.exceptions.InvalidPositionException;
 import com.mycompany.tictactoe.exceptions.SquareAlreadyOccupiedException;
 
 /**
- *
+ *  Rappresenta la griglia di gioco in cui vengono inseriti i simboli.
+ *  la griglia viene rappresentata da una array multi-dimensionale di char.
  * @author Fabio
  */
 public class Grid {
@@ -26,7 +27,11 @@ public class Grid {
     public char[][] getGrid() {
         return this.grid;
     }
-
+    /**
+     * Imposta la griglia nella quale verra' giocata la partita definendone le dimensioni.
+     * @param size e' un'array di massimo due interi che rappresentano la dimensione della griglia, in questo caso [3,3] per una griglia 3x3
+     * @throws InvalidGridSizeException se si prova a dare piu' di due dimensioni alla griglia (per esempio [3,3,3]) o se si prova a creare una griglia inferiore a 3x3 (2x2 non e' valida, per esempio).
+     */
     protected void setGrid(int[] size) throws InvalidGridSizeException{
         if(size.length != 2){
            throw new InvalidGridSizeException("la griglia deve avere due dimensioni, altezza e larghezza");
@@ -43,6 +48,10 @@ public class Grid {
         }
     }
     
+    /**
+     * Esegue controlli su tutta la griglia per verificare se un giocatore ha vinto.
+     * @return il simbolo del vincitore ('x' o 'o'), oppure '-' se non ha vinto nessuno
+     */
     protected char checkGrid(){
 
         char result = this.checkRow();
@@ -126,11 +135,25 @@ public class Grid {
             throw new InvalidPositionException("valore y troppo grande o troppo piccolo");
         }
     }
+    /**
+     * Restituisce il valore della casella nella griglia di gioco che corrisponde alle coordinate passate come parametri.
+     * @param x l'indice delle ascisse nella griglia di gioco(parte da 0)
+     * @param y l'indice delle ordinate nella griglia di gioco (parte da 0)
+     * @return il valore contenuto nel quadrato della griglia corrispondente alle coordinate inserite.
+     * @throws InvalidPositionException se il valore di {@code x} o di {@code y} e' inferiore a 0 o maggiore delle dimensioni della griglia.
+     */
     public char getSquare(int x, int y) throws InvalidPositionException{
         this.validatePosition(x,y);
         return this.grid[x][y];
     }
-    
+    /**
+     * Inserisce un simbolo nella casella della griglia corrispondente alle coordinate passate (x e y)
+     * @param x l'indice delle ascisse nella griglia di gioco(parte da 0)
+     * @param y l'indice delle ordinate nella griglia di gioco (parte da 0)
+     * @param symbol il simbolo da assegnare alla casella corrispondente alle coordinate {@code x} e {@code y}
+     * @throws InvalidPositionException se il valore di {@code x} o di {@code y} e' inferiore a 0 o maggiore delle dimensioni della griglia.
+     * @throws SquareAlreadyOccupiedException se la casella che si intende riempire e' gia' occupata (quindi contiene un valore diverso da '-')
+     */
     public void setSquare(int x, int y, char symbol) throws InvalidPositionException, SquareAlreadyOccupiedException{
         if(this.getSquare(x, y) != '-'){
             throw new SquareAlreadyOccupiedException();
