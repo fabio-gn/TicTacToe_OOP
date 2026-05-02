@@ -93,11 +93,16 @@ public class Game {
         }
 
     }
-    public char makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException, InvalidPlayerException{
-
+    public Player makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException, InvalidPlayerException{
+        
+        Player retvalue = null;
         this.grid.setSquare(x, y, p.getSymbol());
+        if(this.grid.checkGrid() != '-'){
+            retvalue = this.getTurn();
+            return retvalue;
+        }
         this.setTurn();
-        return this.grid.checkGrid();
+        return retvalue;
         
 
     }

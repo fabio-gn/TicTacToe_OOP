@@ -76,7 +76,7 @@ public class Grid {
     private char checkColumn(){
         for(int j=0; j<this.grid.length; j++){
             boolean check = false;
-            for(int i=1; i<grid[i].length; i++){
+            for(int i=1; i<grid[0].length; i++){
                 if(this.grid[i][j] != '-' && this.grid[i][j] == this.grid[i-1][j]){
                     check = true;
                     continue;
@@ -137,7 +137,7 @@ public class Grid {
         }
         this.grid[x][y] = symbol;
     }
-        
+    
 
     
     

@@ -80,7 +80,8 @@ public class Shell {
         
         while(true){
             Player currentPlayer = game.getTurn();
-            System.out.println("TicTacToe/" + currentPlayer.getName() + ">");
+            this.printGrid();
+            System.out.print("TicTacToe/" + currentPlayer.getName() + "> ");
             userInput = reader.nextLine();
             //TODO: serve una funzione per che converta A1, B2 e coordinate simili in indici di array multidimensionale
             //il prompt che viene chiesto all'utente e' proprio quello.
@@ -94,7 +95,16 @@ public class Shell {
             
             try {
                 int[] coordinates = this.convertCoordinateToIndex(userInput);
-                game.makeMove(currentPlayer, coordinates[0], coordinates[1]);
+                Player winner = game.makeMove(currentPlayer, coordinates[0], coordinates[1]);
+                if (winner != null){
+                    this.printGrid();
+                    //System.out.println("ha vinto " + this.game.getTurn().getName());
+                    System.out.println("\n*******************");
+                    System.out.println("  Ha vinto " + winner.getName() + "!");
+                    System.out.println("*******************\n");
+
+                    break;
+                }
             } catch (InvalidCoordinatesException ex) {
                 System.out.println("mossa non valida: riprova.");
                 continue;
@@ -127,4 +137,18 @@ public class Shell {
             }
         }
     }
+    
+    public void printGrid(){
+        char[][] grid = this.game.getGrid().getGrid();
+        System.out.println("    1   2   3");
+        for(int i=0; i<grid.length; i++){
+            System.out.print(" " + this.letters.charAt(i) + " ");
+            for(int j=0; j<grid[i].length; j++){
+                System.out.print("| " + grid[i][j] + " ");
+            }
+            System.out.println("|");
+            System.out.println("   +---+---+---+");
+        }
+    }
+
 }
