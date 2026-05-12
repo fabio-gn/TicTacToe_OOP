@@ -14,7 +14,7 @@ import java.util.List;
 public class Player {
     private String name;
     private char symbol;
-    private static final List<Character> validSymbols = List.of('x', 'o');
+    private static final List<Character> validSymbols = List.of('x', 'o', 'p');
 
     public Player(String name, char symbol) throws InvalidNameException, InvalidSymbolException{
         this.setName(name);

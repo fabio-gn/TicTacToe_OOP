@@ -97,6 +97,13 @@ public class Shell {
                 int[] coordinates = this.convertCoordinateToIndex(userInput);
                 Player winner = game.makeMove(currentPlayer, coordinates[0], coordinates[1]);
                 if (winner != null){
+                    if(winner.getSymbol() == 'p'){
+                        this.printGrid();
+                        System.out.println("\n*******************");
+                        System.out.println("Pareggio!!!");
+                        System.out.println("*******************\n");
+                        break;
+                    }
                     this.printGrid();
                     //System.out.println("ha vinto " + this.game.getTurn().getName());
                     System.out.println("\n*******************");

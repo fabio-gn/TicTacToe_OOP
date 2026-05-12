@@ -23,6 +23,7 @@ public class Game {
     private List<Player> players;
     private Grid grid;
     private Player turn;
+    public int playedMoves;
     
     //prova
     
@@ -35,6 +36,7 @@ public class Game {
     public Game(Player player1, Player player2) throws InvalidPlayerException, IdenticalPlayerNamesException, InvalidGridSizeException{
         this.players = new ArrayList<>();
         this.setPlayers(player1, player2);
+        this.playedMoves = 0;
         this.setTurn();
         this.setGrid();
     }
@@ -96,11 +98,18 @@ public class Game {
     public Player makeMove(Player p, int x, int y) throws InvalidPositionException, SquareAlreadyOccupiedException, InvalidPlayerException{
         
         Player retvalue = null;
+
         this.grid.setSquare(x, y, p.getSymbol());
         if(this.grid.checkGrid() != '-'){
             retvalue = this.getTurn();
             return retvalue;
         }
+        this.playedMoves++;
+        if(this.playedMoves == this.grid.getGrid().length * this.grid.getGrid()[0].length){
+            return new Player("pareggio", 'p');
+        }
+        
+        
         this.setTurn();
         return retvalue;
         

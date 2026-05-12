@@ -87,8 +87,8 @@ public class Grid {
             boolean[] checks = new boolean[this.grid[i].length];
             for(int j=1; j<grid[0].length; j++){
                 if(this.grid[j][i] != '-' && this.grid[j][i] == this.grid[j-1][i]){
-                   checks[i-1] = true;
-                   checks[i] = true;
+                   checks[j-1] = true;
+                   checks[j] = true;
                     
                 }
 
