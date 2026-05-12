@@ -7,6 +7,7 @@ package com.mycompany.tictactoe;
 import com.mycompany.tictactoe.exceptions.InvalidGridSizeException;
 import com.mycompany.tictactoe.exceptions.InvalidPositionException;
 import com.mycompany.tictactoe.exceptions.SquareAlreadyOccupiedException;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,58 +60,69 @@ public class Grid {
     
     private char checkRow(){
         for(int i=0; i<this.grid.length; i++){
-            boolean check = false;
+            boolean[] check = new boolean[this.grid[i].length];
             for(int j=1; j<this.grid[i].length; j++){
                 if(this.grid[i][j] != '-' && this.grid[i][j] == this.grid[i][j-1]){
-                    check = true;
+                   check[j-1] = true;
+                   check[j] = true;
                     continue;
                 }
-                check = false;
             }
-            if(check == true){
+            if(this.checkForTrues(check)){
                 return this.grid[i][0];
             }
         }
         return '-';
     }
+    private boolean checkForTrues(boolean[] bools){
+        for(int i=0; i<bools.length; i++){
+            if(!bools[i]){
+                return false;
+            }
+        }
+        return true;
+    }
     private char checkColumn(){
-        for(int j=0; j<this.grid.length; j++){
-            boolean check = false;
-            for(int i=1; i<grid[0].length; i++){
-                if(this.grid[i][j] != '-' && this.grid[i][j] == this.grid[i-1][j]){
-                    check = true;
-                    continue;
+        for(int i=0; i<this.grid.length; i++){
+            boolean[] checks = new boolean[this.grid[i].length];
+            for(int j=1; j<grid[0].length; j++){
+                if(this.grid[j][i] != '-' && this.grid[j][i] == this.grid[j-1][i]){
+                   checks[i-1] = true;
+                   checks[i] = true;
+                    
                 }
-                check = false;
+
                 
             }
-            if(check == true){
-                return grid[0][j];
+            if(this.checkForTrues(checks)){
+                return grid[0][i];
             }
         }
         return '-';
     }
     private char checkDiagonal(){
-        boolean check = false;
+        boolean[] checks = new boolean[3];
         for(int i=1; i<this.grid.length; i++){
             if(grid[i][i] != '-' && grid[i][i] == grid[i-1][i-1]){
-                check = true;
-                continue;
+                checks[i-1] = true;
+                checks[i] = true;
             }
-            check = false;
+
         }
-        if(check == true){
+        if(this.checkForTrues(checks)){
             return this.grid[0][0];
         }
+        
+        checks = new boolean[3];
         for(int i=1; i<this.grid.length; i++){
             int j = (this.grid.length - 1) - i;
             if(this.grid[i][j] != '-' && this.grid[i][j] == this.grid[i-1][j+1]){
-                check = true;
-                continue;
+                checks[i-1] = true;
+                checks[i] = true;
             }
-            check = false;
+
         }
-        if(check == true) {
+        if(this.checkForTrues(checks)) {
             return this.grid[0][2];
         }
 
